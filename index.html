@@ -571,8 +571,7 @@
       <span class="wordmark" id="wm" style="display:none">monogoto</span>
     </div>
     <div class="mode-toggle" role="group" aria-label="Modo de precios">
-      <button class="mode-btn" data-mode="catalogo">Catálogo</button>
-      <button class="mode-btn" data-mode="detal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Detal</button>
+      <button class="mode-btn" data-mode="detal">Detal</button>
       <button class="mode-btn" data-mode="mayorista"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Mayorista</button>
     </div>
     <div class="head-break" aria-hidden="true"></div>
@@ -879,7 +878,8 @@ const MARCAS_VISIBLES = 8;
 const MAX_VISTOS = 12;
 
 let productos = [], mayorista = null;
-let modo = localStorage.getItem('mg_modo') || 'catalogo';
+/* Detal es libre y es el modo por defecto; solo Mayorista pide PIN */
+let modo = localStorage.getItem('mg_modo') === 'mayorista' ? 'mayorista' : 'detal';
 let cat = 'Todos', sub = 'Todas', q = '';
 let orden = 'defecto', soloNuevos = false, soloPromo = false, verAgotados = true;
 let marcaSel = 'todas';
@@ -1902,7 +1902,7 @@ let modoPendiente = null;
 document.querySelectorAll('.mode-btn').forEach(b => b.onclick = () => setMode(b.dataset.mode));
 function setMode(m){
   if(m === modo) return;
-  if(m === 'catalogo'){ aplicarModo('catalogo'); return; }
+  if(m === 'detal'){ aplicarModo('detal'); return; }
   modoPendiente = m;
   $('pinTitle').textContent = m === 'detal' ? 'PIN precios detal' : 'PIN precios mayorista';
   $('pinSub').textContent = 'Ingresa el PIN de acceso.';
