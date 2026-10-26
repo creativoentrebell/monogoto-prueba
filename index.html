@@ -139,9 +139,6 @@
   .crumb button:hover{color:var(--oscuro)}
   .section-title{font-family:var(--body);font-weight:600;font-size:1.55rem;line-height:1.2;color:var(--oscuro);overflow-wrap:anywhere}
   .section-count{font-size:.85rem;color:var(--tinta);margin-top:4px}
-  .mascota{position:absolute;right:-6px;top:-14px;height:76px;width:auto;pointer-events:none;user-select:none;
-    filter:drop-shadow(0 6px 10px rgba(111,92,72,.2))}
-  .titlebox.con-mascota{padding-right:70px}
 
   .filters{grid-area:filters;align-self:start;display:flex;flex-direction:column}
   .f-head,.f-foot{display:none}
@@ -232,10 +229,17 @@
   .tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--taupe);flex-shrink:0}
 
   /* ============ Más vendidos ============ */
-  .destacados{background:#fff;border:1px solid var(--borde);border-radius:var(--radius);padding:18px 20px 20px}
-  .destacados-title{font-family:var(--body);font-weight:600;font-size:1.1rem;color:var(--oscuro);margin-bottom:14px;
-    display:flex;align-items:center;gap:8px}
-  .destacados-title svg{width:18px;height:18px;stroke:var(--tinta)}
+  .destacados{position:relative;background:var(--tinta);border-radius:var(--radius);padding:22px 22px 24px;margin-top:26px;
+    box-shadow:0 14px 30px rgba(111,92,72,.22)}
+  .destacados-head{display:flex;flex-direction:column;gap:3px;margin-bottom:18px;padding-right:120px}
+  .destacados-title{font-family:var(--body);font-weight:600;font-size:1.4rem;line-height:1.2;color:#fff;
+    display:flex;align-items:center;gap:9px}
+  .destacados-title svg{width:22px;height:22px;flex-shrink:0;fill:#f4e8d8;stroke:#f4e8d8}
+  .destacados-sub{font-size:.9rem;font-weight:400;color:#f4e8d8}
+  .destacados .card{border-color:transparent}
+  .destacados .card:hover{border-color:var(--arena);box-shadow:0 10px 24px rgba(0,0,0,.18)}
+  .goto{position:absolute;right:22px;top:-46px;height:112px;width:auto;pointer-events:none;user-select:none;
+    filter:drop-shadow(0 8px 12px rgba(47,38,29,.3))}
   .destacados-viewport{position:relative}
   .destacados-track{display:flex;gap:14px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none}
   .destacados-track::-webkit-scrollbar{display:none}
@@ -459,8 +463,6 @@
     .titlebox .crumb{flex:0 0 100%;margin-bottom:2px}
     .section-title{font-size:1.35rem}
     .section-count{margin-top:0}
-    .mascota{display:none}
-    .titlebox.con-mascota{padding-right:0}
 
     /* Panel "Filtrar" deslizable */
     .filters{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);height:100vh;height:100dvh;align-self:stretch;background:#fff;z-index:105;
@@ -492,6 +494,12 @@
     .rtools.vacio{display:none}
     .results{gap:14px}
     .destacados,.vistos{padding:14px 14px 16px;border-radius:18px}
+    .destacados{padding-top:18px;margin-top:22px}
+    .destacados-head{padding-right:76px;margin-bottom:14px}
+    .destacados-title{font-size:1.15rem}
+    .destacados-title svg{width:18px;height:18px}
+    .destacados-sub{font-size:.8rem}
+    .goto{height:78px;right:12px;top:-34px}
     .destacados-arrow{display:none}
     .nr-box{flex-direction:column;padding:22px 20px;gap:16px}
     .nr-icon{width:60px;height:60px;flex-basis:60px}
@@ -600,8 +608,6 @@
       <nav class="crumb" id="crumb" aria-label="Ruta"></nav>
       <h1 class="section-title" id="title">Todos los productos</h1>
       <div class="section-count" id="count"></div>
-      <img class="mascota" src="img/mascota.png" alt="" aria-hidden="true"
-        onload="document.getElementById('titlebox').classList.add('con-mascota')" onerror="this.remove()">
     </div>
 
     <aside class="filters" id="filters" aria-label="Filtros">
@@ -685,9 +691,13 @@
       </div>
 
       <section class="destacados" id="destacadosWrap" style="display:none" aria-label="Más vendidos de Skincare">
-        <div class="destacados-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Más vendidos de Skincare
+        <img class="goto" src="img/mascota.png" alt="" aria-hidden="true" onerror="this.remove()">
+        <div class="destacados-head">
+          <h2 class="destacados-title">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Más vendidos de Skincare
+          </h2>
+          <span class="destacados-sub">Los favoritos de nuestras clientas</span>
         </div>
         <div class="destacados-viewport">
           <button class="destacados-arrow prev" id="destacadosPrev" aria-label="Ver anteriores">
