@@ -336,6 +336,25 @@
   .pswatches img{width:44px;height:44px;border-radius:11px;border:1.5px solid var(--borde);cursor:pointer;object-fit:cover;background:#fff;transition:border-color .15s}
   .pswatches img:hover,.pswatches img.sel{border-color:var(--tinta)}
   .pdesc{font-size:.93rem;line-height:1.55;color:var(--tinta)}
+  /* Ficha: frase, ingredientes y advertencia */
+  .presumen{font-size:1rem;font-weight:500;line-height:1.45;color:var(--oscuro)}
+  .ping{border:1px solid var(--borde);border-radius:14px;overflow:hidden}
+  .ping-h,.ping-r{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px;padding:9px 14px}
+  .ping-h{background:var(--crema-claro);font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta)}
+  .ping-r{border-top:1px solid var(--borde);font-size:.84rem;line-height:1.35;color:#4a3f34}
+  .ping-r b{font-weight:600;color:var(--oscuro)}
+  .pwarn{display:flex;gap:10px;align-items:flex-start;background:#fff4e0;border:1px solid #f0d9a8;border-radius:14px;padding:10px 14px;
+    font-size:.84rem;line-height:1.4;color:#6b4a12}
+  .pwarn svg{width:18px;height:18px;flex:0 0 18px;margin-top:1px}
+  .pdesc-det summary{cursor:pointer;font-size:.85rem;font-weight:600;color:var(--tinta);list-style:none;display:flex;align-items:center;gap:6px}
+  .pdesc-det summary::-webkit-details-marker{display:none}
+  .pdesc-det summary::after{content:'+';font-size:1rem;line-height:1}
+  .pdesc-det[open] summary::after{content:'−'}
+  .pdesc-det p{margin-top:8px}
+  /* Descripción de la marca al filtrarla */
+  .marca-desc{font-size:.88rem;line-height:1.5;color:#4a3f34;background:var(--crema-claro);border-radius:14px;padding:10px 14px;margin-top:10px;max-width:640px}
+  .marca-desc b{font-weight:600;color:var(--oscuro)}
+  @media(max-width:899px){.marca-desc{flex:1 1 100%;max-width:none;margin-top:6px}}
   .pprice{font-family:var(--body);font-weight:600;font-size:1.7rem;color:var(--tinta);margin-top:auto}
 
   /* También te puede interesar */
@@ -710,6 +729,10 @@
   .af-card-marca{font-size:.68rem;letter-spacing:.08em;color:#6b5f53;text-transform:uppercase}
   .af-card-n{font-size:.88rem;line-height:1.3;font-weight:400;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .af-card-p{font-weight:600;font-size:1.05rem;color:var(--tinta)}
+  .af-card-ing{font-size:.75rem;line-height:1.35;color:#4a3f34}
+  .af-card-ing b{font-weight:600}
+  .af-card-warn{display:flex;gap:6px;align-items:flex-start;font-size:.72rem;line-height:1.35;color:#6b4a12;background:#fff4e0;border-radius:8px;padding:6px 8px}
+  .af-card-warn svg{width:13px;height:13px;flex:0 0 13px;margin-top:1px}
   .af-para{align-self:flex-start;font-size:.72rem;background:#f6eee4;color:var(--cafe);padding:4px 10px;border-radius:999px}
   .af-freq{font-size:.75rem;color:#6b5f53}
   .af-alts{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--borde);padding-top:8px}
@@ -793,6 +816,57 @@
   .bv-nota{font-size:.75rem;color:#6b5f53;text-align:center;margin-top:10px}
 
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+  /* Horario (mañana / noche) en la ficha */
+  .pfacts{display:flex;flex-wrap:wrap;gap:6px}
+  .pfact{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--arena);border-radius:8px;padding:4px 10px;
+    font-size:.8rem;color:var(--oscuro);background:#fff}
+  .pfact svg{width:15px;height:15px;color:var(--tinta)}
+  .pfact b{font-weight:600}
+  /* Opciones parecidas */
+  .psim{border-top:1px solid var(--borde);padding:20px 24px 22px;background:#fcf8f3}
+  .psim.agot{background:#fbf3e8}
+  .psim-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .psim-head h3{font-size:1.05rem;font-weight:600;color:var(--oscuro)}
+  .psim-head p{font-size:.78rem;color:#8a7a6a}
+  .psim-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .sim{border:1px solid var(--borde);border-radius:16px;background:#fff;padding:12px;display:flex;flex-direction:column;gap:8px;
+    cursor:pointer;text-align:left;font-family:var(--body);color:inherit}
+  .sim:hover{border-color:var(--arena)}
+  .sim-top{display:flex;gap:10px;align-items:flex-start}
+  .sim-rank{font-size:1.1rem;font-weight:600;color:var(--tinta);min-width:14px;padding-top:2px}
+  .sim-img{width:64px;height:64px;flex:0 0 64px;border-radius:12px;border:1px solid var(--borde);overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff}
+  .sim-img img{width:100%;height:100%;object-fit:contain}
+  .sim-img .noimg{font-weight:600;font-size:1.4rem;color:var(--crema)}
+  .sim-t{min-width:0;display:flex;flex-direction:column;gap:2px}
+  .sim-marca{font-size:.62rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--tinta)}
+  .sim-n{font-size:.84rem;line-height:1.3;color:var(--oscuro);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .sim-p{font-size:.95rem;font-weight:600;color:var(--tinta)}
+  .sim-why{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
+  .sim-why li{font-size:.76rem;line-height:1.35;color:#5d5045;padding-left:13px;position:relative}
+  .sim-why li::before{content:'';position:absolute;left:2px;top:.5em;width:5px;height:5px;border-radius:50%;background:var(--tinta)}
+  .sim-why li.eco{color:#3f6b3a;font-weight:600}
+  .sim-why li.eco::before{background:#3f6b3a}
+  .sim-ojo{font-size:.74rem;line-height:1.35;background:#fff4e0;border:1px solid #f0d9a8;border-radius:10px;padding:6px 9px;color:#7a5512}
+  .sim-ver{margin-top:auto;font-size:.8rem;font-weight:600;color:var(--tinta);text-decoration:underline;text-underline-offset:3px}
+  .p-agotado-msg button{display:block;margin:6px auto 0;background:none;border:none;font-family:var(--body);font-size:.82rem;font-weight:600;
+    color:var(--tinta);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+  /* Rutina con una sola marca */
+  .af-marcas{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
+  .af-seg{display:inline-flex;border:1px solid var(--arena);border-radius:999px;padding:3px;background:#fff}
+  .af-seg button{border:none;background:none;border-radius:999px;padding:6px 14px;font-family:var(--body);font-size:.8rem;font-weight:600;color:var(--tinta);cursor:pointer}
+  .af-seg button[aria-pressed="true"]{background:var(--tinta);color:#fff}
+  .af-mchip{border:1px solid var(--arena);background:#fff;border-radius:999px;padding:6px 12px;font-family:var(--body);font-size:.78rem;color:var(--oscuro);cursor:pointer}
+  .af-mchip small{color:#8a7a6a;font-size:.72rem}
+  .af-mchip[aria-pressed="true"]{border-color:var(--tinta);background:#f6eee4;font-weight:600}
+  .af-card-otra{font-size:.72rem;line-height:1.35;color:#8a7a6a;font-style:italic}
+  @media (max-width:760px){
+    .psim{padding:16px 16px 18px}
+    .psim-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -16px;padding:0 16px 4px}
+    .sim{flex:0 0 78%;scroll-snap-align:start}
+    .af-marcas{flex-wrap:nowrap;overflow-x:auto;margin-right:-16px;padding-right:16px}
+    .af-mchip,.af-seg{flex:0 0 auto}
+  }
 </style>
 </head>
 <body>
@@ -814,7 +888,7 @@
     </button>
     <form class="search-wrap" id="searchForm" role="search" autocomplete="off">
       <label for="search" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Buscar</label>
-      <input type="search" id="search" placeholder="Buscar producto, marca o referencia…" autocomplete="off"
+      <input type="search" id="search" placeholder="Buscar producto, marca, ingrediente o necesidad…" autocomplete="off"
         role="combobox" aria-expanded="false" aria-controls="sugBox" aria-autocomplete="list">
       <button type="button" class="search-clear" id="searchClear" aria-label="Borrar búsqueda">×</button>
       <button type="submit" class="search-btn" aria-label="Buscar">
@@ -840,6 +914,7 @@
       <nav class="crumb" id="crumb" aria-label="Ruta"></nav>
       <h1 class="section-title" id="title">Todos los productos</h1>
       <div class="section-count" id="count"></div>
+      <p class="marca-desc" id="marcaDesc" style="display:none"></p>
     </div>
 
     <aside class="filters" id="filters" aria-label="Filtros">
@@ -1006,7 +1081,11 @@
         <div class="pref" id="pRef"></div>
         <div class="pcat" id="pCat"></div>
         <div class="tags" id="pTags"></div>
+        <div class="pfacts" id="pFacts" style="display:none"></div>
         <div class="pswatches" id="pSwatches"></div>
+        <div class="presumen" id="pResumen"></div>
+        <div class="ping" id="pIng"></div>
+        <div class="pwarn" id="pWarn"></div>
         <div class="pdesc" id="pDesc"></div>
         <div class="pprice" id="pPrice"></div>
 
@@ -1031,9 +1110,16 @@
           </div>
           <button class="btn primary btn-add" id="btnAgregar">Agregar al pedido</button>
         </div>
-        <div class="p-agotado-msg" id="pAgotadoMsg" style="display:none">Este producto está agotado.</div>
+        <div class="p-agotado-msg" id="pAgotadoMsg" style="display:none">Este producto está agotado.<button type="button" id="pVerSim" style="display:none">Ver opciones parecidas ↓</button></div>
       </div>
     </div>
+    <section class="psim" id="pSim" style="display:none" aria-labelledby="pSimH">
+      <div class="psim-head">
+        <h3 id="pSimH">Te puede servir en su lugar</h3>
+        <p>De la más parecida a la menos parecida</p>
+      </div>
+      <div class="psim-grid" id="pSimGrid"></div>
+    </section>
     <section class="prel" id="pRel" style="display:none" aria-label="También te puede interesar">
       <div class="prel-head">
         <h3>También te puede interesar</h3>
@@ -1183,7 +1269,7 @@ const POR_PAGINA = 48;
 const MARCAS_VISIBLES = 8;
 const MAX_VISTOS = 12;
 
-let productos = [], mayorista = null;
+let productos = [], mayorista = null, marcasInfo = {};
 /* Detal es libre y es el modo por defecto; solo Mayorista pide PIN */
 let modo = localStorage.getItem('mg_modo') === 'mayorista' ? 'mayorista' : 'detal';
 let cat = 'Todos', sub = 'Todas', q = '';
@@ -1211,6 +1297,7 @@ let datosCliente = { nombre: '', cedula: '', direccion: '', ciudad: '', telefono
 const $ = id => document.getElementById(id);
 const fmt = n => '$' + Number(n).toLocaleString('es-CO');
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ICONO_AVISO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17.5v.5"/></svg>';
 const ICON_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 const ICON_LUPA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>';
 
@@ -1232,7 +1319,9 @@ function actualizarContadorHeader(){
 async function cargar(){
   try{
     const r = await fetch('monogoto_productos.json');
-    productos = (await r.json()).productos;
+    const datos = await r.json();
+    productos = datos.productos;
+    marcasInfo = datos.marcas || {};
   }catch(e){
     $('grid').innerHTML = '<div class="nr-box"><div class="nr-txt"><h2>No se pudo cargar el catálogo.</h2><ul><li>Intenta recargar la página.</li></ul></div></div>';
     return;
@@ -1267,6 +1356,17 @@ function prepararProducto(p){
   p._txt = normTxt(p.nombre + ' ' + (p.marca || '') + ' ' + (p.subcategoria || ''));
   p._words = [...new Set(p._txt.split(/[^a-z0-9ñ]+/).filter(w => w.length >= 3))];
   p._ref = normRef(p.referencia);
+  /* Segundo nivel: ficha de skincare (ingredientes, para qué es, tipo de piel, paso, resumen) */
+  const tipos = Array.isArray(p.tiposPiel) ? p.tiposPiel.map(t => t === 'Todas' ? 'todo tipo de piel' : 'piel ' + t) : [];
+  const momento = p.momento === 'ambos' ? 'manana noche dia' : p.momento === 'noche' ? 'noche' : p.momento ? 'manana dia' : '';
+  p._txt2 = normTxt([
+    ...(Array.isArray(p.ingredientes) ? p.ingredientes.map(i => i.nombre) : []),
+    ...(Array.isArray(p.etiquetas) ? p.etiquetas : []), ...tipos,
+    p.paso || '', momento, p.resumen || '', p.categoria || ''
+  ].join(' '));
+  p._words2 = [...new Set(p._txt2.split(/[^a-z0-9ñ]+/).filter(w => w.length >= 4))];
+  /* Tercer nivel: descripción larga */
+  p._txt3 = normTxt(p.descripcion || '');
 }
 function distancia(a, b, max){
   if(Math.abs(a.length - b.length) > max) return max + 1;
@@ -1296,18 +1396,42 @@ function palabraParecida(w, words){
   }
   return false;
 }
+/* Palabras que la gente escribe y cómo aparecen en las fichas */
+const BUSQ_SINONIMOS = {
+  acne: ['granitos', 'acne'], espinillas: ['granitos', 'espinillas'], barros: ['granitos'], granos: ['granitos'], granito: ['granitos'],
+  arrugas: ['antiedad', 'arrugas'], lineas: ['antiedad', 'lineas'], firmeza: ['antiedad', 'firmeza'], envejecimiento: ['antiedad'],
+  melasma: ['manchas', 'melasma'], mancha: ['manchas'], rojeces: ['calmante', 'rojeces', 'rojez'], rojez: ['calmante', 'rojez'],
+  irritacion: ['calmante', 'irritacion'], bloqueador: ['protector solar', 'bloqueador'], spf: ['protector solar', 'spf'],
+  hidratar: ['hidratacion', 'hidrata'], hidratante: ['hidratacion', 'hidratante'], resequedad: ['piel seca', 'resequedad'],
+  brillo: ['grasa', 'brillo'], grasosa: ['grasa'], poro: ['poros'], ojera: ['ojeras'], bolsas: ['ojeras', 'contorno'],
+  opaca: ['luminosidad', 'opaca'], luminosa: ['luminosidad'], vitamina: ['vitamina'], retinoide: ['retin'], retinol: ['retin']
+};
+/* Palabras de relleno que no deben exigirse en la ficha */
+const BUSQ_VACIAS = new Set(['para', 'de', 'del', 'la', 'el', 'los', 'las', 'con', 'y', 'mi', 'que', 'en', 'un', 'una', 'por', 'a', 'al', 'o']);
 function prepararBusqueda(texto){
   const t = String(texto || '').trim();
-  return { t: t.toLowerCase(), ref: normRef(t), palabras: normTxt(t).split(' ').filter(Boolean), cache: new Map() };
+  const palabras = normTxt(t).split(' ').filter(Boolean);
+  return { t: t.toLowerCase(), ref: normRef(t), palabras, utiles: palabras.filter(w => !BUSQ_VACIAS.has(w)), cache: new Map() };
 }
-/* 3 = referencia · 2 = todas las palabras exactas · 1 = parecidas · 0 = no coincide */
+function enFicha(w, txt){
+  if(txt.includes(w)) return true;
+  const sin = BUSQ_SINONIMOS[w];
+  return !!sin && sin.some(x => txt.includes(x));
+}
+/* 3 = referencia · 2 = todas las palabras en nombre/marca · 1 = parecidas en nombre/marca
+   0.9 = encontradas en la ficha (ingrediente, para qué es, tipo de piel…) · 0.7 = parecidas en la ficha
+   0.4 = encontradas en la descripción · 0 = no coincide */
 function puntaje(p, info){
   if(!info.palabras.length && !info.ref) return 0;
   if(info.cache.has(p.id)) return info.cache.get(p.id);
   let s = 0;
+  const u = info.utiles.length ? info.utiles : info.palabras;
   if(String(p.referencia).toLowerCase().includes(info.t) || (info.ref.length >= 2 && p._ref.includes(info.ref))) s = 3;
   else if(info.palabras.length && info.palabras.every(w => p._txt.includes(w))) s = 2;
   else if(info.palabras.length && info.palabras.every(w => p._txt.includes(w) || palabraParecida(w, p._words))) s = 1;
+  else if(u.length && p._txt2 && u.every(w => p._txt.includes(w) || enFicha(w, p._txt2))) s = 0.9;
+  else if(u.length && p._txt2 && u.every(w => p._txt.includes(w) || enFicha(w, p._txt2) || palabraParecida(w, p._words2) || palabraParecida(w, p._words))) s = 0.7;
+  else if(u.length && u.every(w => w.length >= 3) && u.every(w => p._txt.includes(w) || (p._txt2 && enFicha(w, p._txt2)) || enFicha(w, p._txt3))) s = 0.4;
   info.cache.set(p.id, s);
   return s;
 }
@@ -1755,6 +1879,9 @@ function render(){
   $('title').textContent = q ? `“${q}”` : sub !== 'Todas' ? sub : cat === 'Todos' ? 'Todos los productos' : cat;
   $('count').textContent = list.length.toLocaleString('es-CO') + (list.length === 1 ? ' resultado' : ' resultados') +
     (modo === 'mayorista' ? ' · precios mayoristas' : modo === 'detal' ? ' · precios detal' : '');
+  const mDesc = marcaSel !== 'todas' && marcasInfo[marcaSel];
+  $('marcaDesc').innerHTML = mDesc ? `<b>${esc(marcaSel)}.</b> ${esc(mDesc)}` : '';
+  $('marcaDesc').style.display = mDesc ? '' : 'none';
 
   pintarChips();
 
@@ -1812,9 +1939,102 @@ function actualizarPrecioModal(){
   else $('pPrice').textContent = fmt(valor);
 }
 
+
+/* ---------- Opciones parecidas (mismo paso de la rutina) ----------
+   Se calculan solas con la ficha: paso, para qué es, tipo de piel e ingredientes.
+   Agotado → "Te puede servir en su lugar" (cualquier marca).
+   Disponible → "Opciones parecidas de otras marcas". */
+const ACTIVOS = [
+  ['niacinamida', /niacinam/], ['retinoides', /retin|bakuchiol/], ['vitamina C', /vitamina c|ascorb/],
+  ['ácido hialurónico', /hialur/], ['centella', /centella|cica|madecas|asiatic/], ['ceramidas', /ceramid/],
+  ['PDRN', /pdrn|salmon/], ['péptidos', /peptid/], ['colágeno', /colagen/], ['ácido salicílico', /salicil|\bbha\b/],
+  ['AHA', /glicol|lactic|\baha\b|mandel/], ['PHA', /\bpha\b|gluconolact/], ['árbol de té', /arbol de te/],
+  ['ácido azelaico', /azelai/], ['ácido kójico', /kojic/], ['ácido tranexámico', /tranex|\btxa\b/], ['arbutina', /arbutin/],
+  ['glutatión', /glutati/], ['heartleaf', /heartleaf|corazon/], ['arroz', /arroz/], ['propóleo', /propoleo/],
+  ['baba de caracol', /caracol|mucina/], ['pantenol', /pantenol|vitamina b5/], ['escualano', /escuala/], ['exosomas', /exosom/],
+  ['microagujas', /microaguja|espicula/], ['ginseng', /ginseng/], ['aloe', /aloe/], ['adenosina', /adenosin/],
+  ['té verde', /te verde/], ['azuleno', /azuleno/], ['vitamina E', /vitamina e\b|tocofer/], ['alantoína', /alantoin/],
+  ['cúrcuma', /curcuma/], ['probióticos', /probiot|lactobac|bifida|ferment/], ['calamina', /calamin/], ['arcilla', /arcilla|barro/]
+];
+function activosDe(p){
+  if(p._act) return p._act;
+  const t = normTxt((Array.isArray(p.ingredientes) ? p.ingredientes.map(i => i.nombre) : []).join(' | '));
+  p._act = new Set(ACTIVOS.filter(([, re]) => re.test(t)).map(([n]) => n));
+  return p._act;
+}
+const NOMBRE_PASO_SIM = { 'Serum': 'sérum', 'Hidratante': 'hidratante', 'Contorno de ojos': 'contorno de ojos', 'Protector solar': 'protector solar',
+  'Aceite limpiador': 'aceite limpiador', 'Limpiador': 'limpiador', 'Tónico': 'tónico', 'Esencia': 'esencia', 'Exfoliante': 'exfoliante',
+  'Mascarilla': 'mascarilla', 'Tratamiento puntual': 'tratamiento puntual' };
+function similares(p){
+  if(!p.paso) return [];
+  const precioP = precioOrden(p);
+  const etP = new Set(Array.isArray(p.etiquetas) ? p.etiquetas : []);
+  const tpP = Array.isArray(p.tiposPiel) ? p.tiposPiel : [];
+  const actP = activosDe(p);
+  return disponiblesEnModo()
+    .filter(x => x.id !== p.id && x.paso === p.paso && !x.agotado && (p.agotado || x.marca !== p.marca))
+    .filter(x => { const v = precioOrden(x); return typeof v === 'number' && v > 0; })
+    .map(x => {
+      let s = 0;
+      const comunes = (Array.isArray(x.etiquetas) ? x.etiquetas : []).filter(e => etP.has(e));
+      s += comunes.length * 3;
+      const tpX = Array.isArray(x.tiposPiel) ? x.tiposPiel : [];
+      if(tpP.length && tpX.length){
+        if(tpP.includes('Todas') || tpX.includes('Todas') || tpX.some(t => tpP.includes(t))) s += 2; else s -= 2;
+      }
+      const act = [...activosDe(x)].filter(a => actP.has(a));
+      s += Math.min(act.length, 3) * 2;
+      if(x.momento === p.momento) s += 1;
+      const ojo = [];
+      if(x.momento === 'noche' && p.momento !== 'noche'){ s -= 1; ojo.push('Es solo de noche.'); }
+      if(x.momento === 'mañana' && p.momento !== 'mañana'){ s -= 1; ojo.push('Es solo de día.'); }
+      if(x.advertencia && !p.advertencia){ s -= 3; ojo.push(afAvisoCorto(x.advertencia) + '.'); }
+      if(x.masVendido) s += 1;
+      if(!x.imagen) s -= 1;
+      const v = precioOrden(x);
+      if(typeof precioP === 'number' && precioP > 0 && Math.abs(v - precioP) / precioP <= 0.3) s += 0.5;
+      const por = ['Mismo paso: ' + (NOMBRE_PASO_SIM[p.paso] || p.paso.toLowerCase())];
+      if(comunes.length) por.push('También para: ' + comunes.slice(0, 3).join(', ').toLowerCase());
+      if(act.length) por.push('Comparte: ' + act.slice(0, 3).join(', '));
+      let eco = null;
+      if(typeof precioP === 'number' && precioP > 0 && v < precioP * 0.95) eco = fmt(precioP - v) + ' más económico';
+      return { x, s, por, ojo, eco, afin: comunes.length + act.length };
+    })
+    .filter(c => c.afin > 0 && c.s > 2)
+    .sort((a, b) => b.s - a.s || precioOrden(a.x) - precioOrden(b.x))
+    .slice(0, 3);
+}
+function pintarSimilares(p){
+  const sim = similares(p);
+  $('pVerSim').style.display = (p.agotado && sim.length) ? '' : 'none';
+  if(!sim.length){ $('pSim').style.display = 'none'; return []; }
+  $('pSim').style.display = 'block';
+  $('pSim').classList.toggle('agot', !!p.agotado);
+  $('pSimH').textContent = p.agotado ? 'Te puede servir en su lugar' : 'Opciones parecidas de otras marcas';
+  $('pSimGrid').innerHTML = sim.map((c, i) => {
+    const x = c.x;
+    return `<button type="button" class="sim" data-id="${x.id}">
+      <span class="sim-top">
+        <span class="sim-rank">${i + 1}</span>
+        <span class="sim-img">${x.imagen ? `<img src="${x.imagen}" alt="" loading="lazy" onerror="this.outerHTML='<span class=noimg>m</span>'">` : '<span class="noimg">m</span>'}</span>
+        <span class="sim-t">
+          ${x.marca && x.marca !== 'Otras' ? `<span class="sim-marca">${esc(x.marca)}</span>` : ''}
+          <span class="sim-n">${esc(x.nombre)}</span>
+          <span class="sim-p">${precioTexto(x)}</span>
+        </span>
+      </span>
+      <ul class="sim-why">${c.por.map(w => `<li>${esc(w)}</li>`).join('')}${c.eco ? `<li class="eco">${esc(c.eco)}</li>` : ''}</ul>
+      ${c.ojo.length ? `<span class="sim-ojo"><b>Ojo:</b> ${esc(c.ojo.join(' '))}</span>` : ''}
+      <span class="sim-ver">Ver producto</span>
+    </button>`;
+  }).join('');
+  $('pSimGrid').querySelectorAll('.sim').forEach(b => b.onclick = () => abrirProducto(b.dataset.id));
+  return sim.map(c => c.x.id);
+}
+
 /* También te puede interesar: primero la misma marca, luego la misma subcategoría */
-function relacionados(p){
-  const pool = disponiblesEnModo().filter(x => x.id !== p.id);
+function relacionados(p, excluir = []){
+  const pool = disponiblesEnModo().filter(x => x.id !== p.id && !excluir.includes(x.id));
   const peso = x => (x.agotado ? 10 : 0) - (x.masVendido ? 2 : 0) - (x.nuevo ? 1 : 0);
   const porPeso = arr => arr.map((x,i) => [x,i]).sort((a,b) => peso(a[0]) - peso(b[0]) || a[1] - b[1]).map(x => x[0]);
   const conMarca = p.marca && p.marca !== 'Otras';
@@ -1826,8 +2046,8 @@ function relacionados(p){
   mismaMarca.slice(2).forEach(x => { if(salida.length < 4) salida.push([x, 'Misma marca']); });
   return salida;
 }
-function pintarRelacionados(p){
-  const rel = relacionados(p);
+function pintarRelacionados(p, excluir){
+  const rel = relacionados(p, excluir);
   if(!rel.length){ $('pRel').style.display = 'none'; return; }
   $('pRel').style.display = 'block';
   $('pRelGrid').innerHTML = rel.map(([x, why]) => {
@@ -1893,13 +2113,32 @@ function abrirProducto(id, opciones = {}){
   const et = Array.isArray(p.etiquetas) ? p.etiquetas.filter(Boolean) : [];
   $('pTags').innerHTML = et.map(t => `<span class="tag">${esc(t)}</span>`).join('');
   $('pTags').style.display = et.length ? '' : 'none';
+  const HORARIO = { 'ambos': [AF.ICON_SOL + AF.ICON_LUNA, 'mañana y noche'], 'mañana': [AF.ICON_SOL, 'solo de día'], 'noche': [AF.ICON_LUNA, 'solo de noche'] };
+  const hor = HORARIO[p.momento];
+  $('pFacts').innerHTML = hor ? `<span class="pfact">${hor[0]}<span>Horario: <b>${hor[1]}</b></span></span>` : '';
+  $('pFacts').style.display = hor ? '' : 'none';
   $('pSwatches').innerHTML = fotos.length > 1
     ? fotos.map((f,i) => `<img src="${f}" class="${i===0?'sel':''}" loading="lazy">`).join('') : '';
   $('pSwatches').querySelectorAll('img').forEach(t => t.onclick = () => {
     $('pImg').innerHTML = `<img src="${t.src}" alt="${esc(p.nombre)}">`;
     $('pSwatches').querySelectorAll('img').forEach(x => x.classList.toggle('sel', x === t));
   });
-  $('pDesc').textContent = p.descripcion || '';
+  $('pResumen').textContent = p.resumen || '';
+  $('pResumen').style.display = p.resumen ? '' : 'none';
+  const ings = Array.isArray(p.ingredientes) ? p.ingredientes : [];
+  $('pIng').innerHTML = ings.length
+    ? '<div class="ping-h"><span>Ingrediente</span><span>¿Para qué sirve?</span></div>' +
+      ings.map(i => `<div class="ping-r"><b>${esc(i.nombre)}</b><span>${esc(i.funcion)}</span></div>`).join('')
+    : '';
+  $('pIng').style.display = ings.length ? '' : 'none';
+  $('pWarn').innerHTML = p.advertencia ? ICONO_AVISO + `<span>${esc(p.advertencia)}</span>` : '';
+  $('pWarn').style.display = p.advertencia ? '' : 'none';
+  // Con ficha, la descripción larga queda plegada para no repetir información
+  if(p.descripcion && (p.resumen || ings.length)){
+    $('pDesc').innerHTML = `<details class="pdesc-det"><summary>Descripción completa</summary><p>${esc(p.descripcion)}</p></details>`;
+  } else {
+    $('pDesc').textContent = p.descripcion || '';
+  }
   $('pDesc').style.display = p.descripcion ? 'block' : 'none';
 
   if(p.variantes && p.variantes.length){
@@ -1923,12 +2162,15 @@ function abrirProducto(id, opciones = {}){
     $('pAddBlock').style.display = 'flex';
     $('pAgotadoMsg').style.display = 'none';
   }
-  pintarRelacionados(p);
+  pintarRelacionados(p, pintarSimilares(p));
 
   $('prodOverlay').classList.add('open');
   document.querySelector('.pmodal').scrollTop = 0;
   renderVistos();
 }
+document.addEventListener('click', e => {
+  if(e.target && e.target.id === 'pVerSim') $('pSim').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 function ocultarProducto(){
   $('prodOverlay').classList.remove('open');
   productoActual = null;
@@ -2455,7 +2697,7 @@ const AF = {
   ICON_LUNA: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>'
 };
 
-function afNuevo(){ return { paso: 'inicio', tipo: null, nose: {}, preoc: [], intens: {}, edad: null, nivel: null, tab: 'manana', guia: false, cambios: {}, abiertas: {} }; }
+function afNuevo(){ return { marca: null, paso: 'inicio', tipo: null, nose: {}, preoc: [], intens: {}, edad: null, nivel: null, tab: 'manana', guia: false, cambios: {}, abiertas: {} }; }
 let af = afNuevo();
 
 function afTipo(){
@@ -2509,7 +2751,8 @@ function afObjetivos(){
   return w;
 }
 const AF_FUERTE = /retin|glycol|salicyl|\bbha\b|\baha\b|peel/i;
-function afEsExfoliante(p){ return p.paso === 'Exfoliante' || (p.etiquetas || []).includes('Exfoliación') || /glycol|salicyl|\bbha\b|\baha\b|peel/i.test(p.nombre); }
+/* Activo fuerte = el producto trae advertencia de uso (vitamina A, ácidos exfoliantes o microagujas) */
+function afEsExfoliante(p){ return !!p.advertencia; }
 function afPuntaje(p, w){
   const et = Array.isArray(p.etiquetas) ? p.etiquetas : [];
   let s = 0;
@@ -2519,7 +2762,7 @@ function afPuntaje(p, w){
     if(p.tiposPiel.includes('Todas') || p.tiposPiel.includes(AF.TIPO_NOMBRE[t])) s += 2;
     else s -= 3;
   }
-  if(t === 'sensible' && p.paso !== 'Exfoliante' && (et.includes('Exfoliación') || AF_FUERTE.test(p.nombre))) s -= 2;
+  if(t === 'sensible' && p.paso !== 'Exfoliante' && p.advertencia) s -= 2;
   if(p.masVendido) s += 1.5;
   if(!p.imagen) s -= 2;
   return s;
@@ -2586,19 +2829,40 @@ function afRutina(tab){
     const k = tab + '|' + paso;
     let cands = afCandidatos(paso, tab, w).filter(c => !usados.has(c.p.id));
     if(!cands.length) return;
+    /* Rutina de una sola marca: si la marca no tiene ese paso disponible, se completa con otra */
+    let otraMarca = false;
+    if(af.marca){
+      const deMarca = cands.filter(c => c.p.marca === af.marca);
+      if(deMarca.length) cands = deMarca; else otraMarca = true;
+    }
     /* Un solo producto exfoliante o con ácidos fuertes por rutina */
     if(exfolia){
-      cands = cands.map(c => ({ p: c.p, s: c.s - (afEsExfoliante(c.p) || /retin/i.test(c.p.nombre) ? 8 : 0) }))
+      cands = cands.map(c => ({ p: c.p, s: c.s - (afEsExfoliante(c.p) ? 8 : 0) }))
         .sort((a, b) => b.s - a.s || afPrecio(a.p) - afPrecio(b.p));
     }
     const elegido = cands.find(c => c.p.id === af.cambios[k]) || cands[0];
     usados.add(elegido.p.id);
     if(afEsExfoliante(elegido.p)) exfolia = true;
     cubrir(elegido.p);
-    elegidos[paso] = { k, paso, tab, p: elegido.p, motivo: afMotivo(elegido.p, base), freq: afFrecuencia(paso, tab),
+    elegidos[paso] = { k, paso, tab, otraMarca, p: elegido.p, motivo: afMotivo(elegido.p, base), freq: afFrecuencia(paso, tab),
       alts: cands.filter(c => c.p.id !== elegido.p.id).slice(0, 3).map(c => c.p) };
   });
   return pasos.filter(p => elegidos[p]).map(p => elegidos[p]);
+}
+/* Marcas que pueden armar casi toda la rutina con productos disponibles */
+function afMarcasPosibles(){
+  const guardada = af.marca;
+  af.marca = null;
+  const total = new Set(afRutina('manana').concat(afRutina('noche')).map(x => x.tab + x.paso)).size;
+  const marcas = [...new Set(disponiblesEnModo().filter(p => p.paso && !p.agotado && p.marca && p.marca !== 'Otras').map(p => p.marca))];
+  const res = marcas.map(m => {
+    af.marca = m;
+    const r = afRutina('manana').concat(afRutina('noche'));
+    return { m, n: r.filter(x => !x.otraMarca).length, t: r.length };
+  }).filter(x => x.n >= 3 && x.n >= Math.ceil(x.t * 0.5))
+    .sort((a, b) => b.n / b.t - a.n / a.t || b.n - a.n);
+  af.marca = guardada;
+  return { lista: res.slice(0, 6), total };
 }
 function afPerfil(){
   const lineas = [];
@@ -2610,7 +2874,7 @@ function afPerfil(){
   const e = AF.EDADES.find(x => x.id === af.edad);
   if(e && e.id !== 'nd') lineas.push('Edad: ' + e.t.toLowerCase());
   const n = AF.NIVELES.find(x => x.id === (af.nivel || 'completa'));
-  lineas.push('Rutina: ' + n.t.toLowerCase());
+  lineas.push('Rutina: ' + n.t.toLowerCase() + (af.marca ? ' · una sola marca: ' + af.marca : ''));
   return lineas;
 }
 
@@ -2734,13 +2998,34 @@ function afTarjeta(x){
       <div class="af-card-paso">Paso ${x.n} · ${AF.NOMBRE_PASO[x.paso] || x.paso}</div>
       ${p.marca && p.marca !== 'Otras' ? `<div class="af-card-marca">${esc(p.marca)}</div>` : ''}
       <div class="af-card-n">${esc(p.nombre)}</div>
+      ${x.otraMarca ? `<div class="af-card-otra">${esc(af.marca)} no tiene este paso disponible, por eso va de otra marca</div>` : ''}
       <div class="af-card-p">${precioTexto(p)}</div>
       <span class="af-para">Para: ${esc(x.motivo)}</span>
+      ${Array.isArray(p.ingredientes) && p.ingredientes.length ? `<div class="af-card-ing">Con <b>${esc(p.ingredientes.slice(0, 2).map(i => i.nombre).join(' + '))}</b></div>` : ''}
       <div class="af-freq">${x.freq}</div>
+      ${p.advertencia ? `<div class="af-card-warn">${ICONO_AVISO}<span>${esc(afAvisoCorto(p.advertencia))}</span></div>` : ''}
       ${x.alts.length ? `<button type="button" class="af-link" style="align-self:flex-start;font-size:.82rem" data-af="alts" data-v="${x.k}" aria-expanded="${abierta}">${abierta ? 'Ocultar opciones' : 'Ver otras opciones (' + x.alts.length + ')'}</button>` : ''}
     </div>
     ${abierta ? `<div class="af-alts">${x.alts.map(a =>
       `<button type="button" class="af-alt" data-af="cambiar" data-k="${x.k}" data-v="${a.id}"><span>${esc(a.nombre)}</span><span>${precioTexto(a)}</span></button>`).join('')}</div>` : ''}
+  </div>`;
+}
+function afAvisoCorto(a){
+  if(/^Lleva vitamina A/.test(a)) return 'Vitamina A: solo de noche y con protector al día siguiente';
+  if(/^Exfolia/.test(a)) return 'Exfoliante: de noche, día de por medio';
+  if(/^Lleva microagujas/.test(a)) return 'Microagujas: empieza 2 o 3 veces por semana';
+  return a;
+}
+function afMarcasHTML(){
+  const { lista } = afMarcasPosibles();
+  if(!lista.length && !af.marca) return '';
+  if(af.marca && !lista.some(x => x.m === af.marca)) af.marca = null;
+  return `<div class="af-marcas">
+    <div class="af-seg" role="group" aria-label="Marcas de la rutina">
+      <button type="button" data-af="marca" data-v="" aria-pressed="${!af.marca}">Mezclar marcas</button>
+      <button type="button" data-af="marca" data-v="${esc(lista.length ? lista[0].m : '')}" aria-pressed="${!!af.marca}">Una sola marca</button>
+    </div>
+    ${af.marca ? lista.map(x => `<button type="button" class="af-mchip" data-af="marca" data-v="${esc(x.m)}" aria-pressed="${x.m === af.marca}">${esc(x.m)} <small>${x.n} de ${x.t} pasos</small></button>`).join('') : ''}
   </div>`;
 }
 function afSumar(lista){ return lista.reduce((t, x) => t + (afPrecio(x.p) || 0), 0); }
@@ -2762,6 +3047,7 @@ function afResultadoHTML(){
           <div class="af-chips">${chips.map(c => `<span class="af-chip">${esc(c)}</span>`).join('')}</div></div>
         <button type="button" class="af-btn2" data-af="editar">Cambiar respuestas</button>
       </div>
+      ${afMarcasHTML()}
       <div class="af-tabs" role="tablist">
         <button type="button" class="af-tab" role="tab" aria-selected="${af.tab === 'manana'}" data-af="tab" data-v="manana">${AF.ICON_SOL}Por la mañana</button>
         <button type="button" class="af-tab" role="tab" aria-selected="${af.tab === 'noche'}" data-af="tab" data-v="noche">${AF.ICON_LUNA}Por la noche</button>
@@ -2830,6 +3116,7 @@ $('afContent').addEventListener('click', e => {
     case 'edad': af.edad = af.edad === v ? null : v; break;
     case 'nivel': af.nivel = v; break;
     case 'tab': af.tab = v; afRender(false); return;
+    case 'marca': af.marca = v || null; af.cambios = {}; af.abiertas = {}; afRender(false); return;
     case 'alts': af.abiertas[v] = !af.abiertas[v]; break;
     case 'cambiar': af.cambios[k] = v; af.abiertas[k] = false; break;
     case 'ver': abrirProducto(v); return;
