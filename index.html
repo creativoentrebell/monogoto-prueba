@@ -867,6 +867,34 @@
     .af-marcas{flex-wrap:nowrap;overflow-x:auto;margin-right:-16px;padding-right:16px}
     .af-mchip,.af-seg{flex:0 0 auto}
   }
+
+  /* Términos y tratamiento de datos */
+  .af-acepta{display:flex;gap:12px;align-items:flex-start;background:var(--fondo);border:1px solid var(--borde);border-radius:16px;padding:14px 16px;cursor:pointer}
+  .af-acepta input{appearance:none;-webkit-appearance:none;flex:0 0 22px;width:22px;height:22px;margin:1px 0 0;border:1.8px solid var(--tinta);border-radius:6px;
+    background:#fff;cursor:pointer;display:grid;place-content:center}
+  .af-acepta input:checked{background:var(--tinta)}
+  .af-acepta input:checked::after{content:'';width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+  .af-acepta input:focus-visible{outline:2px solid var(--tinta);outline-offset:2px}
+  .af-acepta span{font-size:.9rem;line-height:1.5;color:#4a3f34}
+  .af-acepta a,.af-acepta u{color:var(--oscuro);font-weight:600;text-underline-offset:3px}
+  /* Tipo de piel con foto */
+  .af-tipos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .af-opt.conimg{padding:8px 8px 14px;justify-content:flex-start;gap:3px}
+  .af-opt.conimg .af-tipo-img{width:100%;aspect-ratio:3/2;border-radius:10px;overflow:hidden;background:var(--crema-claro);margin-bottom:8px;
+    display:flex;align-items:center;justify-content:center;color:var(--tinta)}
+  .af-opt.conimg .af-tipo-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .af-opt.conimg .af-tipo-img svg{width:44px;height:44px}
+  .af-opt.conimg .af-opt-t,.af-opt.conimg .af-opt-d{padding:0 6px}
+  .af-opt.conimg::after{top:16px;right:16px;margin-top:0}
+  @media (max-width:760px){
+    .af-tipos{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .af-opt.conimg{padding:6px 6px 10px}
+    .af-opt.conimg .af-opt-t{font-size:.95rem}
+    .af-opt.conimg .af-opt-d{font-size:.8rem}
+    .af-opt.conimg::after{top:12px;right:12px;margin-top:0}
+    .af-acepta{padding:12px 14px}
+    .af-acepta span{font-size:.85rem}
+  }
 </style>
 </head>
 <body>
@@ -2639,6 +2667,11 @@ $('searchClear').onclick = () => { fijarBusqueda(''); cerrarSugerencias(); aplic
    tiposPiel (Normal, Seca, Grasa, Mixta, Sensible o Todas) y etiquetas.
    Solo recomienda productos con "paso", disponibles, con precio y en el modo activo. */
 const AF_IMG = 'img/analisis/';
+const AF_ICONO_DUDA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.7-2.5 2.3-2.5 3.8"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg>';
+/* Enlace a los términos y condiciones (si queda vacío, el texto se muestra sin enlace) */
+const AF_TERMINOS_URL = '';
+/* Casilla de términos y tratamiento de datos: false = oculta (pendiente de aprobación), true = se pide antes de comenzar */
+const AF_PEDIR_TERMINOS = false;
 const AF = {
   TIPOS: [
     { id: 'normal', t: 'Normal', d: 'Equilibrada: ni tirante ni brillante.' },
@@ -2697,7 +2730,7 @@ const AF = {
   ICON_LUNA: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>'
 };
 
-function afNuevo(){ return { marca: null, paso: 'inicio', tipo: null, nose: {}, preoc: [], intens: {}, edad: null, nivel: null, tab: 'manana', guia: false, cambios: {}, abiertas: {} }; }
+function afNuevo(){ return { acepta: !!lsGet('mg_terminos', false), marca: null, paso: 'inicio', tipo: null, nose: {}, preoc: [], intens: {}, edad: null, nivel: null, tab: 'manana', guia: false, cambios: {}, abiertas: {} }; }
 let af = afNuevo();
 
 function afTipo(){
@@ -2715,6 +2748,7 @@ function afOrden(){
     afConFotos().length ? 'intensidad' : null, 'edad', 'rutina', 'resultado'].filter(Boolean);
 }
 function afPuedeSeguir(){
+  if(af.paso === 'inicio') return !AF_PEDIR_TERMINOS || !!af.acepta;
   if(af.paso === 'tipo') return !!af.tipo;
   if(af.paso === 'nose') return !!afTipo();
   if(af.paso === 'preocupaciones') return af.preoc.length > 0;
@@ -2916,7 +2950,7 @@ function afPintarLado(){
   side.innerHTML = `<div><div class="af-kicker">Tu rutina en 1 minuto</div><div class="af-side-t">Encontremos lo que tu piel necesita</div></div>
     <ol class="af-steps">${AF.PASOS_LADO.map((l, i) =>
       `<li class="${i === idx ? 'actual' : i < idx ? 'hecho' : ''}"><span>${i + 1}</span>${l}</li>`).join('')}</ol>
-    <div class="af-side-note">Sin fotos ni datos personales. Tus respuestas solo se usan para armar tu rutina.</div>`;
+    <div class="af-side-note">No te pedimos fotos. Tus respuestas se usan para armar tu rutina.</div>`;
 }
 function afPintarProgreso(){
   const idx = { inicio: -1, tipo: 0, nose: 0, preocupaciones: 1, intensidad: 2, edad: 3, rutina: 4, resultado: 5 }[af.paso];
@@ -2938,12 +2972,18 @@ function afContenido(){
           <div class="af-intro-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>Lo que te preocupa</div>
           <div class="af-intro-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>Cuántos pasos quieres</div>
         </div>
+        ${AF_PEDIR_TERMINOS ? `<label class="af-acepta"><input type="checkbox" id="afAcepta" ${af.acepta ? 'checked' : ''}>
+          <span>Declaro estar de acuerdo con los ${AF_TERMINOS_URL
+            ? `<a href="${AF_TERMINOS_URL}" target="_blank" rel="noopener">términos y condiciones</a>`
+            : '<u>términos y condiciones</u>'} y autorizo el tratamiento de mis datos personales para fines publicitarios.</span></label>` : ''}
         <p class="af-legal">Es una recomendación de rutina según tus respuestas, no un diagnóstico. Si tienes una condición en la piel, consulta a tu dermatólogo.</p>
       </div>`;
     case 'tipo':
       return afCabecera(kicker, '¿Cómo es tu piel?', 'Escoge la que más se parezca a tu piel en un día normal.') +
-        `<div class="af-grid2">${AF.TIPOS.map(o => afOpt(af.tipo === o.id,
-          `<span class="af-opt-t">${o.t}</span><span class="af-opt-d">${o.d}</span>`, `data-af="tipo" data-v="${o.id}"`, 'alto')).join('')}</div>`;
+        `<div class="af-tipos">${AF.TIPOS.map(o => afOpt(af.tipo === o.id,
+          `<span class="af-tipo-img">${o.id === 'nose' ? AF_ICONO_DUDA
+            : `<img src="${AF_IMG}piel-${o.id}.webp" alt="Ejemplo de piel ${o.t.toLowerCase()}" loading="lazy" onerror="this.remove()">`}</span>` +
+          `<span class="af-opt-t">${o.t}</span><span class="af-opt-d">${o.d}</span>`, `data-af="tipo" data-v="${o.id}"`, 'conimg')).join('')}</div>`;
     case 'nose': {
       const r = afTipo();
       return afCabecera(kicker, 'Averigüemos tu tipo de piel', 'Tres preguntas rápidas y te decimos cuál parece ser.') +
@@ -3145,6 +3185,12 @@ $('afCerrar').onclick = afCerrar;
 $('afReiniciar').onclick = () => { af = afNuevo(); afRender(true); };
 $('afAtras').onclick = () => afMover(-1);
 $('afSiguiente').onclick = () => afMover(1);
+$('afContent').addEventListener('change', e => {
+  if(e.target.id !== 'afAcepta') return;
+  af.acepta = e.target.checked;
+  lsSet('mg_terminos', af.acepta);
+  $('afSiguiente').disabled = !afPuedeSeguir();
+});
 $('afOverlay').addEventListener('click', e => { if(e.target === $('afOverlay')) afCerrar(); });
 window.addEventListener('keydown', e => {
   if(e.key === 'Escape' && $('afOverlay').classList.contains('open') && !$('prodOverlay').classList.contains('open') &&
